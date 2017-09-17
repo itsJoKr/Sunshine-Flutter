@@ -19,7 +19,6 @@ class _WeatherState extends State<Weather> {
     super.initState();
 
     var apiClient = ApiClient.getInstance();
-
     Future<WeatherData> fWeatherData = apiClient.getWeather();
     fWeatherData.then((content) => this.setState((){ this._weather = content; }))
         .catchError((e) => this.setState(() { this._weather = new WeatherData("", "Error while fetching data!"); }));

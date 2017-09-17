@@ -12,9 +12,10 @@ class WeatherData {
     var map = decoder.convert(json);
 
     String description = map["weather"][0]["description"];
-    double temperature = map["main"]["temp"];
+    double temperature = map["main"]["temp"].toDouble();
 
     return new WeatherData(temperature.toString(), description);
   }
+
 }
 
