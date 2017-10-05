@@ -6,7 +6,7 @@ import 'package:sunshine/model/ForecastData.dart';
 import 'dart:async';
 
 class ApiClient {
-  static ApiClient _instance = null;
+  static ApiClient _instance;
 
   static ApiClient getInstance() {
     if (_instance == null) {

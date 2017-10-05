@@ -7,13 +7,10 @@ class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Sunshine"),
-      ),
       body: new Container(
         child: new Column(
           children: <Widget>[
-            new Expanded(child: new Weather()),
+            new AspectRatio(child: new Weather(), aspectRatio: 750.0/815.0),
             new Expanded(child: new ForecastList()),
           ],
         )

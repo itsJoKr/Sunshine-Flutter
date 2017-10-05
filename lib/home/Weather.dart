@@ -20,22 +20,37 @@ class _WeatherState extends State<Weather> {
 
     var apiClient = ApiClient.getInstance();
     Future<WeatherData> fWeatherData = apiClient.getWeather();
-    fWeatherData.then((content) => this.setState((){ this._weather = content; }))
-        .catchError((e) => this.setState(() { this._weather = new WeatherData("", "Error while fetching data!"); }));
+    fWeatherData
+        .then((content) => this.setState(() {
+              this._weather = content;
+            }))
+        .catchError((e) => this.setState(() {
+              this._weather = new WeatherData("", "Error while fetching data!");
+            }));
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Center(
-      child: new Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          new Text(this._weather.temperature, style: new TextStyle(fontSize: 30.0)),
-          new Text(this._weather.weather),
-        ],
-      ),
-    );
+    final weatherInfo = new Center(child: new Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        new Text(this._weather.temperature,
+            style: new TextStyle(fontSize: 30.0)),
+        new Text(this._weather.weather),
+      ],
+    ));
+
+
+    return new Container(
+        decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage("assets/img/parisback.png"),
+              fit: BoxFit.cover,
+        )),
+        child: new Column(
+          children: <Widget>[
+            weatherInfo,
+          ],
+        ));
   }
-
-
 }
