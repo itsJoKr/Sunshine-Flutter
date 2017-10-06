@@ -4,6 +4,8 @@ import 'package:sunshine/network/ApiClient.dart';
 
 import 'dart:async';
 
+import 'package:sunshine/res/Colors.dart';
+
 class Weather extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -31,26 +33,54 @@ class _WeatherState extends State<Weather> {
 
   @override
   Widget build(BuildContext context) {
-    final weatherInfo = new Center(child: new Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        new Text(this._weather.temperature,
-            style: new TextStyle(fontSize: 30.0)),
-        new Text(this._weather.weather),
-      ],
-    ));
-
-
     return new Container(
         decoration: new BoxDecoration(
             image: new DecorationImage(
-              image: new AssetImage("assets/img/parisback.png"),
-              fit: BoxFit.cover,
+          image: new AssetImage("assets/img/parisback.png"),
+          fit: BoxFit.cover,
         )),
-        child: new Column(
+        child: new Row(
           children: <Widget>[
-            weatherInfo,
+            new Flexible(
+              child: new WeatherInfo(this._weather),
+            ),
           ],
         ));
   }
 }
+
+class WeatherInfo extends StatelessWidget {
+  WeatherInfo(WeatherData this._weather);
+
+  final WeatherData _weather;
+
+  @override
+  Widget build(BuildContext context) {
+    final roundedTemperature = this._weather.temperature.split(".")[0] + "°";
+    final condition = '${this._weather.weather[0].toUpperCase()}${this._weather
+        .weather.substring(1)}';
+
+    return new Container(
+      child: new Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Text(
+            "Paris",
+            style: new TextStyle(
+                fontSize: 21.0,
+                fontWeight: FontWeight.w500,
+                color: SColors.blueParis),
+          ),
+          new Text(
+            condition,
+            style: new TextStyle(fontSize: 18.0, color: SColors.blueParis),
+          ),
+          new Text(roundedTemperature,
+              style: new TextStyle(fontSize: 72.0, color: SColors.blueParis)),
+        ],
+      ),
+      padding: new EdgeInsets.only(left: 64.0),
+    );
+  }
+}
+
