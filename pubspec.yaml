@@ -4,6 +4,7 @@ description: A new Flutter project.
 dependencies:
   flutter:
     sdk: flutter
+  queries: "^0.0.15"
 
 dev_dependencies:
   flutter_test:

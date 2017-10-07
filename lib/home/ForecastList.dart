@@ -30,8 +30,34 @@ class _ForecastListState extends State<ForecastList> {
             }));
   }
 
+  static List<List<ForecastWeather>> groupForecastListByDay(ForecastData forecastData) {
+    if (forecastData == null) return null;
+
+    List<List<ForecastWeather>> forecastListByDay = [];
+    final forecastList = forecastData.forecastList;
+
+    int currentDay = forecastList[0].dateTime.day;
+    List<ForecastWeather> intermediateList = [];
+
+    for (var forecast in forecastList) {
+      if (currentDay == forecast.dateTime.day) {
+        intermediateList.add(forecast);
+      } else {
+        forecastListByDay.add(intermediateList);
+        currentDay = forecast.dateTime.day;
+        intermediateList = [];
+        intermediateList.add(forecast);
+      }
+    }
+
+    forecastListByDay.add(intermediateList);
+    return forecastListByDay;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final forecastByDay = groupForecastListByDay(_forecastData);
+
     return new Stack(
       children: <Widget>[
         new Image(
@@ -39,11 +65,11 @@ class _ForecastListState extends State<ForecastList> {
           fit: BoxFit.fitWidth,
         ),
         new Container(
-          child: new ListView.builder(
+          child: new PageView.builder(
             itemBuilder: (BuildContext context, int index) =>
-                new _ForecastListItem(_forecastData.forecastList[index]),
-            itemCount:
-                _forecastData == null ? 0 : _forecastData.forecastList.length,
+                new _ForecastList(forecastByDay[index]),
+            itemCount: forecastByDay != null ? forecastByDay.length : 0,
+            scrollDirection: Axis.horizontal,
           ),
           decoration: new BoxDecoration(
               color: Colors.white,
@@ -63,6 +89,22 @@ class _ForecastListState extends State<ForecastList> {
     );
   }
 }
+
+class _ForecastList extends StatelessWidget {
+  final List<ForecastWeather> _forecast;
+
+  _ForecastList(this._forecast);
+
+  @override
+  Widget build(BuildContext context) {
+    return  new ListView.builder(
+      itemBuilder: (BuildContext context, int index) =>
+      new _ForecastListItem(_forecast[index]),
+      itemCount: _forecast == null ? 0 : _forecast.length,
+    );
+  }
+}
+
 
 class _ForecastListItem extends StatelessWidget {
   final ForecastWeather weather;
@@ -92,10 +134,10 @@ class _ForecastListItem extends StatelessWidget {
                   new Container(
                     width: 80.0,
                     alignment: FractionalOffset.centerRight,
-                      child: new Text(
-                        weather.temperature + "°C",
-                        style: new TextStyle(fontSize: 20.0),
-                      ),
+                    child: new Text(
+                      weather.temperature + "°C",
+                      style: new TextStyle(fontSize: 20.0),
+                    ),
                   ),
                 ],
               ),
