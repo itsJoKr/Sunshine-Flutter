@@ -34,7 +34,8 @@ class ForecastWeather {
   static ForecastWeather _deserialize(Map<String, dynamic> map) {
     String description = map["weather"][0]["description"];
     double temperature = map["main"]["temp"].toDouble();
-    DateTime dateTime = new DateTime.fromMicrosecondsSinceEpoch(map["dt"]);
+    int epochTimeMs = map["dt"]*1000;
+    DateTime dateTime = new DateTime.fromMillisecondsSinceEpoch(epochTimeMs);
 
     return new ForecastWeather(temperature.toString(), description, dateTime);
   }
