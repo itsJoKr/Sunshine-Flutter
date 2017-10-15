@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sunshine/home/HomePage.dart';
+import 'package:sunshine/HomePage.dart';
 
 void main() {
   runApp(new MyApp());

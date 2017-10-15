@@ -4,7 +4,7 @@ import 'package:sunshine/network/ApiClient.dart';
 
 import 'dart:async';
 
-import 'package:sunshine/res/Colors.dart';
+import 'package:sunshine/res/Res.dart';
 
 class Weather extends StatefulWidget {
   @override
@@ -69,14 +69,14 @@ class WeatherInfo extends StatelessWidget {
             style: new TextStyle(
                 fontSize: 21.0,
                 fontWeight: FontWeight.w500,
-                color: SColors.blueParis),
+                color: $Colors.blueParis),
           ),
           new Text(
             condition,
-            style: new TextStyle(fontSize: 18.0, color: SColors.blueParis),
+            style: new TextStyle(fontSize: 18.0, color: $Colors.blueParis),
           ),
           new Text(roundedTemperature,
-              style: new TextStyle(fontSize: 72.0, color: SColors.blueParis)),
+              style: new TextStyle(fontSize: 72.0, color: $Colors.blueParis)),
         ],
       ),
       padding: new EdgeInsets.only(left: 64.0),

@@ -21,6 +21,19 @@ flutter:
   assets:
     - assets/img/parisback.png
     - assets/img/bottom_parisback.png
+    - assets/img/dotEmpty.png
+    - assets/img/dotBlueishFull.png
+    - assets/img/d1s.png
+    - assets/img/d2s.png
+    - assets/img/d3s.png
+    - assets/img/d4s.png
+    - assets/img/d5s.png
+    - assets/img/d6s.png
+    - assets/img/d7s.png
+    - assets/img/d8s.png
+    - assets/img/d9s.png
+    - assets/img/n1s.png
+    - assets/img/n2s.png
 
 
   #  - images/a_dot_ham.jpeg
