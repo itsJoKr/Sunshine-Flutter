@@ -6,8 +6,8 @@ import 'package:sunshine/res/Res.dart';
 import 'package:intl/intl.dart';
 import 'package:sunshine/ui/forecast/ForecastList.dart';
 import 'package:sunshine/ui/widgets/DotPageIndicator.dart';
+import 'package:sunshine/ui/widgets/TextWithExponent.dart';
 
-final timeFormat = new DateFormat('HH:mm');
 final weekdayFormat = new DateFormat('EEE');
 
 class ForecastPager extends StatefulWidget {
@@ -67,11 +67,22 @@ class _ForecastWeekTabs extends StatelessWidget {
 
   _ForecastWeekTabs(this.dateTime, this.currentPage, this.pageCount);
 
+
   @override
   Widget build(BuildContext context) {
     final textStyle = new TextStyle(fontSize: 24.0);
-    final dayOfMonth = dateTime != null ? dateTime.day : "";
+    final int dayOfMonth = dateTime != null ? dateTime.day : 0;
+    String dayMonthSuffix = "";
+
     final weekDay = weekdayFormat.format(dateTime).toString();
+    if (dayOfMonth == 1) {
+      dayMonthSuffix += "st";
+    } else if (dayOfMonth == 2) {
+      dayMonthSuffix += "nd";
+    } else {
+      dayMonthSuffix += "th";
+    }
+
 
     return new Container(
       child: new Container(
@@ -86,9 +97,11 @@ class _ForecastWeekTabs extends StatelessWidget {
               alignment: FractionalOffset.center,
             ),
             new Positioned(
-                child: new Text(
+                child: new TextWithExponent(
                   dayOfMonth.toString(),
-                  style: textStyle,
+                  dayMonthSuffix,
+                  textSize: 24.0,
+                  exponentTextSize: 18.0,
                 ),
                 right: 36.0),
           ],

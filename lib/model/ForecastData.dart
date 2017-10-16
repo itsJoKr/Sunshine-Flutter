@@ -1,6 +1,8 @@
 
 import 'dart:convert';
 
+import 'package:sunshine/model/Condition.dart';
+
 class ForecastData {
 
   List<ForecastWeather> forecastList;
@@ -25,19 +27,22 @@ class ForecastData {
 
 class ForecastWeather {
   String temperature;
-  String description;
+  Condition condition;
   DateTime dateTime;
   //Wind, rain, etc.
 
-  ForecastWeather(this.temperature, this.description, this.dateTime);
+  ForecastWeather(this.temperature, this.condition, this.dateTime);
 
   static ForecastWeather _deserialize(Map<String, dynamic> map) {
     String description = map["weather"][0]["description"];
+    int conditionId = map["weather"][0]["id"];
+    Condition condition = new Condition(conditionId, description);
+
     double temperature = map["main"]["temp"].toDouble();
     int epochTimeMs = map["dt"]*1000;
     DateTime dateTime = new DateTime.fromMillisecondsSinceEpoch(epochTimeMs);
 
-    return new ForecastWeather(temperature.toString(), description, dateTime);
+    return new ForecastWeather(temperature.toString(), condition, dateTime);
   }
 
 }

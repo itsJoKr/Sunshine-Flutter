@@ -14,15 +14,15 @@ class DotPageIndicator extends StatelessWidget {
     final dotEmpty = new Flexible(
         child: new Image(
           image: new AssetImage($Asset.dotEmpty),
-          width: 13.0,
-          height: 13.0,
+          width: 15.0,
+          height: 15.0,
         ));
 
     final dotFull = new Flexible(
         child: new Image(
           image: new AssetImage($Asset.dotFull),
-          width: 13.0,
-          height: 13.0,
+          width: 15.0,
+          height: 15.0,
         ));
 
     for (var i=0; i<pagesCount; i++) {

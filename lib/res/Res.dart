@@ -18,5 +18,4 @@ class $Colors {
 class $Asset {
   static const String dotFull = "assets/img/dotBlueishFull.png";
   static const String dotEmpty = "assets/img/dotEmpty.png";
-
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:sunshine/model/ForecastData.dart';
 import 'package:sunshine/res/Res.dart';
 
-import 'package:sunshine/ui/forecast/ForecastPager.dart';
+import 'package:sunshine/ui/widgets/TextWithExponent.dart';
 
+final timeFormat = new DateFormat('HH');
 
 class ForecastList extends StatelessWidget {
   final List<ForecastWeather> _forecast;
@@ -31,18 +33,16 @@ class _ForecastListItem extends StatelessWidget {
     final time = timeFormat.format(weather.dateTime);
 
     return new Container(
-        padding: new EdgeInsets.all(12.0),
+        height: 65.0,
+        padding: new EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
         child: new Stack(
           children: <Widget>[
-            new Text(
-              time,
-              style: new TextStyle(fontSize: 18.0),
-            ),
+            new Align(child: new TextWithExponent(time, "h"), alignment: FractionalOffset.centerLeft,),
             new Positioned(
               child: new Row(
                 children: <Widget>[
                   new Container(
-                    child: new Text(weather.description),
+                    child: new Image.asset(weather.condition.getAssetString(), height: 46.0, width: 46.0, fit: BoxFit.scaleDown,),
                     margin: new EdgeInsets.only(right: 8.0),
                   ),
                   new Container(

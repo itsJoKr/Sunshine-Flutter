@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sunshine/model/Condition.dart';
 import 'package:sunshine/model/WeatherData.dart';
 import 'package:sunshine/network/ApiClient.dart';
 
@@ -14,7 +15,7 @@ class Weather extends StatefulWidget {
 }
 
 class _WeatherState extends State<Weather> {
-  var _weather = new WeatherData("", "Loading");
+  var _weather = new WeatherData("", new Condition(0, "Loading"));
 
   @override
   void initState() {
@@ -27,7 +28,8 @@ class _WeatherState extends State<Weather> {
               this._weather = content;
             }))
         .catchError((e) => this.setState(() {
-              this._weather = new WeatherData("", "Error while fetching data!");
+              Condition err = new Condition(0, "Error while fetching data!");
+              this._weather = new WeatherData("", err);
             }));
   }
 
@@ -57,8 +59,8 @@ class WeatherInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final roundedTemperature = this._weather.temperature.split(".")[0] + "°";
-    final condition = '${this._weather.weather[0].toUpperCase()}${this._weather
-        .weather.substring(1)}';
+    final condition = '${this._weather.condition.description[0].toUpperCase()}${this._weather
+        .condition.description.substring(1)}';
 
     return new Container(
       child: new Column(
