@@ -42,7 +42,8 @@ class _ForecastListItem extends StatelessWidget {
               child: new Row(
                 children: <Widget>[
                   new Container(
-                    child: new Image.asset(weather.condition.getAssetString(), height: 46.0, width: 46.0, fit: BoxFit.scaleDown,),
+                    child: new Image.asset(weather.condition.getAssetString(), height: 46.0, width: 46.0,
+                      fit: BoxFit.scaleDown, color: $Colors.blueParis,),
                     margin: new EdgeInsets.only(right: 8.0),
                   ),
                   new Container(

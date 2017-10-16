@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget{
       body: new Container(
         child: new Column(
           children: <Widget>[
-            new AspectRatio(child: new Weather(), aspectRatio: 750.0/815.0),
+            new AspectRatio(child: new Weather(), aspectRatio: 750.0/805.0),
             new Expanded(child: new Forecast()),
           ],
         )
