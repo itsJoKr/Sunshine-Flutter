@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sunshine/home/Weather.dart';
 import 'package:sunshine/ui/forecast/Forecast.dart';
-
+import 'package:sunshine/ui/weather/Weather.dart';
 class HomePage extends StatelessWidget{
 
   @override

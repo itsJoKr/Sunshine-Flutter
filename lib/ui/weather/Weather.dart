@@ -6,6 +6,7 @@ import 'package:sunshine/network/ApiClient.dart';
 import 'dart:async';
 
 import 'package:sunshine/res/Res.dart';
+import 'package:sunshine/ui/widgets/TextWithExponent.dart';
 
 class Weather extends StatefulWidget {
   @override
@@ -38,7 +39,7 @@ class _WeatherState extends State<Weather> {
     return new Container(
         decoration: new BoxDecoration(
             image: new DecorationImage(
-          image: new AssetImage("assets/img/parisback.png"),
+          image: new AssetImage($Asset.backgroundParis),
           fit: BoxFit.cover,
         )),
         child: new Row(
@@ -70,15 +71,15 @@ class WeatherInfo extends StatelessWidget {
             "Paris",
             style: new TextStyle(
                 fontSize: 21.0,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w700,
                 color: $Colors.blueParis),
           ),
           new Text(
             condition,
-            style: new TextStyle(fontSize: 18.0, color: $Colors.blueParis),
+            style: new TextStyle(fontSize: 18.0, color: $Colors.blueParis,),
           ),
           new Text(roundedTemperature,
-              style: new TextStyle(fontSize: 72.0, color: $Colors.blueParis)),
+              style: new TextStyle(fontSize: 72.0, color: $Colors.blueParis, fontFamily: "Roboto")),
         ],
       ),
       padding: new EdgeInsets.only(left: 64.0),

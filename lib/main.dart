@@ -22,6 +22,7 @@ class Pages {
 }
 
 var theme = new ThemeData (
-  primarySwatch: Colors.blue
+  primarySwatch: Colors.blue,
+  fontFamily: 'Dosis'
 );
 

@@ -58,6 +58,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   # fonts:
+
+  fonts:
+        - family: Dosis
+          fonts:
+            - asset: assets/font/Dosis-SemiBold.ttf
+              weight: 700
+
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
