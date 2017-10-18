@@ -1,8 +1,8 @@
-# sunshine
+# Sunshine
 
-A new Flutter project.
+Mobile app made with Flutter. More about flutter [here](http://flutter.io/).
 
-## Getting Started
+I wanted to try Flutter, so I grabbed some design from Uplabs, OpenWeatherMap API and developed simple weather app:
 
-For help getting started with Flutter, view our online
-[documentation](http://flutter.io/).
+
+![](https://i.imgur.com/3S04TP9.png)
