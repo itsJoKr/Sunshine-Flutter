@@ -6,6 +6,7 @@ import 'package:sunshine/res/Res.dart';
 
 import 'dart:async';
 import 'package:sunshine/ui/forecast/ForecastPager.dart';
+import 'package:flutter_flux/src/store_watcher.dart';
 
 class Forecast extends StatefulWidget {
   @override
