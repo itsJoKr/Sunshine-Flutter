@@ -39,6 +39,7 @@ class _MainWeatherInfo extends StatelessWidget {
           new Image.asset(
             this.weather.condition.getAssetString(),
             width: 50.0,
+            color: $Colors.blueParis,
           ),
           new Padding(
             padding: new EdgeInsets.only(left: 16.0),
@@ -62,7 +63,7 @@ class _WeatherInfo extends StatelessWidget {
     return new Container(child: new Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        new Image.asset(imageAsset, width: 30.0,),
+        new Image.asset(imageAsset, width: 30.0, color: $Colors.blueParis,),
         new Padding(
           padding: const EdgeInsets.only(left: 16.0, bottom: 12.0, top: 12.0),
           child: new Text(info, style: new TextStyle(fontSize: 20.0),),

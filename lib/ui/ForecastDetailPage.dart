@@ -28,12 +28,13 @@ class ForecastDetailPage extends StatelessWidget {
           decoration: new BoxDecoration(
               gradient: new LinearGradient(
                   colors: [
-                    const Color(0x99336600),
+                    const Color(0x99338600),
                     const Color(0x9900CCFF),
+                    const Color(0xAA0077FF),
                   ],
                   begin: const FractionalOffset(0.0, 0.0),
                   end: const FractionalOffset(0.7, 1.0),
-                  stops: [0.0, 1.0],
+                  stops: [0.0, 0.7, 1.0],
                   tileMode: TileMode.clamp)),
           child: new Center(
             child: new ForecastDetail(weather),
