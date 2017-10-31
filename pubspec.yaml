@@ -35,6 +35,9 @@ flutter:
     - assets/img/d9s.png
     - assets/img/n1s.png
     - assets/img/n2s.png
+    - assets/img/wind.png
+    - assets/img/pres.png
+    - assets/img/water.png
 
 
   #  - images/a_dot_ham.jpeg

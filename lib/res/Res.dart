@@ -19,4 +19,7 @@ class $Asset {
   static const String dotFull = "assets/img/dotBlueishFull.png";
   static const String dotEmpty = "assets/img/dotEmpty.png";
   static const String backgroundParis = "assets/img/parisback.png";
+  static const String pressure = "assets/img/pres.png";
+  static const String humidity = "assets/img/water.png";
+  static const String wind = "assets/img/wind.png";
 }
