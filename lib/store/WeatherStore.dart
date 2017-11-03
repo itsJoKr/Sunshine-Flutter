@@ -13,7 +13,7 @@ class WeatherStore extends Store {
     // TODO make loading widget from here
     this.weatherData = new WeatherData("", new Condition(0, "Loading"));
 
-    triggerOnAction(actionUpdateWeather, (String value) {
+    triggerOnAction(actionUpdateWeather, (dynamic) {
       _updateWeather();
     });
   }
@@ -34,5 +34,5 @@ class WeatherStore extends Store {
 }
 
 // Token and actions
-final Action<String> actionUpdateWeather = new Action<String>();
+final Action actionUpdateWeather = new Action();
 final StoreToken weatherStoreToken = new StoreToken(new WeatherStore());

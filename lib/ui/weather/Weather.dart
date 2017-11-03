@@ -31,7 +31,7 @@ class _WeatherState extends StoreWatcherState {
         this.weather = weatherStore.weatherData;
       });
     });
-    actionUpdateWeather.call("update");
+    actionUpdateWeather.call();
   }
 
   @override
