@@ -6,32 +6,32 @@ import 'package:sunshine/network/ApiClient.dart';
 import 'dart:async';
 
 import 'package:sunshine/res/Res.dart';
+import 'package:sunshine/store/StatelessStoreWidget.dart';
+import 'package:sunshine/store/WeatherStore.dart';
 import 'package:sunshine/ui/widgets/TextWithExponent.dart';
+import 'package:flutter_flux/flutter_flux.dart';
 
-class Weather extends StatefulWidget {
+class Weather extends StatelessStoreWidget {
+
   @override
-  State<StatefulWidget> createState() {
+  StoreWatcherState createState() {
     return new _WeatherState();
   }
+
 }
 
-class _WeatherState extends State<Weather> {
-  var _weather = new WeatherData("", new Condition(0, "Loading"));
+class _WeatherState extends StoreWatcherState {
+  WeatherData weather;
 
   @override
   void initState() {
-    super.initState();
-
-    var apiClient = ApiClient.getInstance();
-    Future<WeatherData> fWeatherData = apiClient.getWeather();
-    fWeatherData
-        .then((content) => this.setState(() {
-              this._weather = content;
-            }))
-        .catchError((e) => this.setState(() {
-              Condition err = new Condition(0, "Error while fetching data!");
-              this._weather = new WeatherData("", err);
-            }));
+    listenToStore(weatherStoreToken, (store) {
+      setState(() {
+        WeatherStore weatherStore = (store as WeatherStore);
+        this.weather = weatherStore.weatherData;
+      });
+    });
+    actionUpdateWeather.call("update");
   }
 
   @override
@@ -45,7 +45,7 @@ class _WeatherState extends State<Weather> {
         child: new Row(
           children: <Widget>[
             new Flexible(
-              child: new WeatherInfo(this._weather),
+              child: new WeatherInfo(this.weather),
             ),
           ],
         ));
