@@ -24,7 +24,7 @@ class _ForecastPagerState extends State<ForecastPager> {
   var currentPage = 0;
   List<List<ForecastWeather>> _forecastByDay;
 
-  _ForecastPagerState(List<List<ForecastWeather>> _forecastByDay);
+  _ForecastPagerState(this._forecastByDay);
 
   @override
   void didUpdateWidget(ForecastPager oldWidget) {

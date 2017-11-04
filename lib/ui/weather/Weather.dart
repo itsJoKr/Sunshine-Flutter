@@ -31,7 +31,7 @@ class Weather extends StoreWatcher {
   @override
   void initStores(ListenToStore listenToStore) {
     listenToStore(weatherStoreToken);
-    actionUpdateWeather.call();
+    actionUpdateWeather.call(); // Initial load
   }
 }
 

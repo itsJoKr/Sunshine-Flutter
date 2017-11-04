@@ -1,62 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_flux/flutter_flux.dart';
 
-import 'package:sunshine/model/ForecastData.dart';
-import 'package:sunshine/network/ApiClient.dart';
 import 'package:sunshine/res/Res.dart';
+import 'package:sunshine/store/ForecastStore.dart';
 
-import 'dart:async';
 import 'package:sunshine/ui/forecast/ForecastPager.dart';
 import 'package:flutter_flux/src/store_watcher.dart';
 
-class Forecast extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return new _ForecastState();
-  }
-}
-
-class _ForecastState extends State<Forecast> {
-  ForecastData _forecastData;
+class Forecast extends StoreWatcher {
 
   @override
-  void initState() {
-    Future<ForecastData> fForecastData = ApiClient.getInstance().getForecast();
-    fForecastData
-        .then((content) => this.setState(() {
-              this._forecastData = content;
-            }))
-        .catchError((e) => this.setState(() {
-              print(e);
-            }));
-  }
-
-  static List<List<ForecastWeather>> groupForecastListByDay(
-      ForecastData forecastData) {
-    if (forecastData == null) return null;
-
-    List<List<ForecastWeather>> forecastListByDay = [];
-    final forecastList = forecastData.forecastList;
-
-    int currentDay = forecastList[0].dateTime.day;
-    List<ForecastWeather> intermediateList = [];
-
-    for (var forecast in forecastList) {
-      if (currentDay == forecast.dateTime.day) {
-        intermediateList.add(forecast);
-      } else {
-        forecastListByDay.add(intermediateList);
-        currentDay = forecast.dateTime.day;
-        intermediateList = [];
-        intermediateList.add(forecast);
-      }
-    }
-
-    forecastListByDay.add(intermediateList);
-    return forecastListByDay;
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, Map<StoreToken, Store> stores) {
+    ForecastStore store = stores[forecastStoreToken];
+    if (store.forecastByDay == null) return new Container();
 
     return new Stack(
       children: <Widget>[
@@ -65,7 +21,7 @@ class _ForecastState extends State<Forecast> {
           fit: BoxFit.fitWidth,
         ),
         new Container(
-          child: new ForecastPager(groupForecastListByDay(this._forecastData)),
+          child: new ForecastPager(store.forecastByDay),
           decoration: new BoxDecoration(
               color: Colors.white,
               shape: BoxShape.rectangle,
@@ -83,7 +39,15 @@ class _ForecastState extends State<Forecast> {
       ],
     );
   }
+
+
+  @override
+  void initStores(ListenToStore listenToStore) {
+    listenToStore(forecastStoreToken);
+    updateForecast.call(); // Initial load
+  }
 }
+
 
 
 
