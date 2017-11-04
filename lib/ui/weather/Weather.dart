@@ -1,41 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sunshine/model/Condition.dart';
 import 'package:sunshine/model/WeatherData.dart';
-import 'package:sunshine/network/ApiClient.dart';
-
-import 'dart:async';
 
 import 'package:sunshine/res/Res.dart';
-import 'package:sunshine/store/StatelessStoreWidget.dart';
 import 'package:sunshine/store/WeatherStore.dart';
 import 'package:sunshine/ui/widgets/TextWithExponent.dart';
 import 'package:flutter_flux/flutter_flux.dart';
 
-class Weather extends StatelessStoreWidget {
-
+class Weather extends StoreWatcher {
   @override
-  StoreWatcherState createState() {
-    return new _WeatherState();
-  }
+  Widget build(BuildContext context, Map<StoreToken, Store> stores) {
+    WeatherStore store = stores[weatherStoreToken];
+    WeatherData weatherData = store.weatherData;
 
-}
-
-class _WeatherState extends StoreWatcherState {
-  WeatherData weather;
-
-  @override
-  void initState() {
-    listenToStore(weatherStoreToken, (store) {
-      setState(() {
-        WeatherStore weatherStore = (store as WeatherStore);
-        this.weather = weatherStore.weatherData;
-      });
-    });
-    actionUpdateWeather.call();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return new Container(
         decoration: new BoxDecoration(
             image: new DecorationImage(
@@ -45,10 +22,16 @@ class _WeatherState extends StoreWatcherState {
         child: new Row(
           children: <Widget>[
             new Flexible(
-              child: new WeatherInfo(this.weather),
+              child: new WeatherInfo(weatherData),
             ),
           ],
         ));
+  }
+
+  @override
+  void initStores(ListenToStore listenToStore) {
+    listenToStore(weatherStoreToken);
+    actionUpdateWeather.call();
   }
 }
 
@@ -60,7 +43,8 @@ class WeatherInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final roundedTemperature = this._weather.temperature.split(".")[0] + "°";
-    final condition = '${this._weather.condition.description[0].toUpperCase()}${this._weather
+    final condition = '${this._weather.condition.description[0]
+        .toUpperCase()}${this._weather
         .condition.description.substring(1)}';
 
     return new Container(
@@ -76,14 +60,19 @@ class WeatherInfo extends StatelessWidget {
           ),
           new Text(
             condition,
-            style: new TextStyle(fontSize: 18.0, color: $Colors.blueParis,),
+            style: new TextStyle(
+              fontSize: 18.0,
+              color: $Colors.blueParis,
+            ),
           ),
           new Text(roundedTemperature,
-              style: new TextStyle(fontSize: 72.0, color: $Colors.blueParis, fontFamily: "Roboto")),
+              style: new TextStyle(
+                  fontSize: 72.0,
+                  color: $Colors.blueParis,
+                  fontFamily: "Roboto")),
         ],
       ),
       padding: new EdgeInsets.only(left: 64.0),
     );
   }
 }
-
